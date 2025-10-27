@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Vocalyst - Voice & Accent Assessment Platform</title>
+<meta name="description" content="AI-powered communication assessments for enterprise recruitment, BPO, call center, and healthcare." />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet" />
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    margin: 0;
+    font-family: 'Montserrat', Arial, sans-serif;
+    background: #f2f5f7;
+    color: #2d3a4b;
+  }
+  header {
+    background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+    min-height: 420px;
+  }
+  .navbar {
+    background: #212e48;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  }
+  .navbar-inner {
+    width: 1100px;
+    max-width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 18px;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    user-select: none;
+  }
+  .logo img {
+    height: 54px;
+    width: auto;
+    margin-right: 14px;
+    display: block;
+  }
+  .logo-text {
+    font-size: 2.3rem;
+    font-weight: 700;
+    color: #9bb8e1;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  nav li {
+    margin: 0 25px;
+  }
+  nav a {
+    text-decoration: none;
+    color: #a3b1d1;
+    font-weight: 600;
+    font-size: 17px;
+    padding: 24px 0;
+    transition: color 0.22s ease;
+  }
+  nav a:hover, nav a:focus {
+    color: #e6eaf9;
+  }
+  .hero {
+    max-width: 1100px;
+    margin: 130px auto 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    min-height: 420px;
+  }
+  .hero-content {
+    flex: 1 1 400px;
+    min-width: 340px;
+    padding: 50px 28px 16px 28px;
+    color: #e6eaf9;
+  }
+  .hero-title {
+    font-size: 50px;
+    font-weight: 900;
+    text-shadow: 0 3px 20px rgba(0, 0, 0, 0.45);
+  }
+  .hero-desc {
+    font-size: 22px;
+    margin: 22px 0 36px 0;
+    line-height: 1.38;
+    max-width: 95%;
+  }
+  .hero-btn {
+    background: #3a56b5;
+    color: #f1f4fb;
+    border: none;
+    padding: 18px 50px;
+    border-radius: 44px;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 5px 14px rgba(58, 86, 181, 0.5);
+    transition: background 0.3s ease;
+  }
+  .hero-btn:hover, .hero-btn:focus {
+    background: #2b3f8b;
+  }
+  .carousel {
+    flex: 1 1 460px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+  .carousel img {
+    width: 460px;
+    height: 270px;
+    border-radius: 28px;
+    box-shadow: 0 14px 48px rgba(7, 25, 58, 0.28);
+    object-fit: cover;
+  }
+  .carousel-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 14px;
+  }
+  .carousel-arrow {
+    background: #4758a9;
+    color: #f1f4fb;
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    font-size: 24px;
+    margin: 0 14px;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(71, 88, 169, 0.45);
+    transition: background 0.25s ease;
+  }
+  .carousel-arrow:hover, .carousel-arrow:focus {
+    background: #2e3e7c;
+  }
+
+  section {
+    margin-bottom: 42px;
+  }
+  .why-section {
+    background: #ffffff;
+    border-radius: 26px;
+    box-shadow: 0 3px 30px rgba(39, 53, 119, 0.1);
+    max-width: 1100px;
+    margin: 38px auto 0 auto;
+    padding: 56px 44px;
+  }
+  .section-title {
+    font-size: 2.6rem;
+    font-weight: 900;
+    color: #2f3f70;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+  .why-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px 48px;
+  }
+  .why-block {
+    display: flex;
+    align-items: flex-start;
+    gap: 22px;
+  }
+  .why-icon {
+    font-size: 46px;
+    color: #4871b9;
+    margin-top: 6px;
+  }
+  .why-content {
+    font-size: 18px;
+  }
+  .why-title {
+    font-weight: 900;
+    font-size: 1.26em;
+    color: #344a8a;
+  }
+  .why-desc {
+    color: #5a668a;
+    margin-top: 10px;
+    line-height: 1.44;
+  }
+
+  .modules-section {
+    background: #ffffff;
+    border-radius: 26px;
+    box-shadow: 0 5px 38px rgba(42, 58, 111, 0.1);
+    max-width: 1100px;
+    margin: 46px auto 0 auto;
+    padding: 64px 48px;
+  }
+  .modules {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 34px 40px;
+  }
+  .module-block {
+    background: linear-gradient(135deg, #4b6cb7 15%, #182848 100%);
+    border-radius: 22px;
+    padding: 30px 20px;
+    box-shadow: 0 6px 31px rgba(24, 40, 80, 0.25);
+    cursor: pointer;
+    transition: box-shadow 0.35s ease, background 0.25s ease;
+    color: #e6eafc;
+  }
+  .module-block:hover {
+    box-shadow: 0 12px 52px rgba(29, 61, 142, 0.4);
+    background: linear-gradient(135deg, #5483d4 15%, #2a3a76 100%);
+  }
+  .module-title {
+    font-size: 22px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .module-title i {
+    font-size: 28px;
+  }
+  .module-desc,
+  .module-usecase {
+    margin-top: 18px;
+    font-size: 16px;
+    color: #dce2f6;
+    line-height: 1.42;
+  }
+  .module-usecase {
+    font-style: italic;
+    color: #acc1ff;
+    font-weight: 600;
+  }
+
+  .subs-section {
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 5px 28px rgba(42, 62, 117, 0.12);
+    max-width: 1100px;
+    margin: 48px auto 0 auto;
+    padding: 46px 40px;
+  }
+  .subs-title {
+    color: #4b6cb7;
+    font-size: 1.8rem;
+    font-weight: 900;
+    margin-bottom: 22px;
+    text-align: center;
+  }
+  ul.subs-list,
+  ul.job-list {
+    margin: 0;
+    padding-left: 28px;
+  }
+  .subs-list li,
+  .job-list li {
+    font-size: 17.5px;
+    margin-bottom: 14px;
+    color: #2c3e80;
+  }
+  .job-list b {
+    color: #1a2766;
+  }
+
+  .report-section {
+    max-width: 1100px;
+    margin: 54px auto 66px auto;
+    background: #e8ebf8;
+    border-radius: 28px;
+    box-shadow: 0 6px 38px rgba(24, 45, 92, 0.1);
+    padding: 48px 36px;
+  }
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    margin-top: 26px;
+  }
+  th,
+  td {
+    background: #ffffff;
+    padding: 16px 22px;
+    text-align: center;
+    font-size: 17.5px;
+    font-weight: 600;
+    border-radius: 12px;
+  }
+  th {
+    color: #344a8e;
+    font-weight: 900;
+  }
+  tr.pass td {
+    background: #dcedc8;
+    color: #33691e;
+  }
+  tr.fail td {
+    background: #f8d7da;
+    color: #b71c1c;
+  }
+  .candidate-name {
+    text-align: left;
+    font-weight: 800;
+    font-size: 19px;
+    color: #3b4a7e;
+  }
+  .status-pass {
+    font-weight: 900;
+    color: #2e7d32;
+  }
+  .status-fail {
+    font-weight: 900;
+    color: #c62828;
+  }
+
+  .footer {
+    background: none;
+    text-align: center;
+    padding: 42px 0 24px 0;
+    color: #666;
+    font-weight: 600;
+  }
+  @media (max-width: 1200px) {
+    .modules,
+    .why-list {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 900px) {
+    .hero {
+      flex-direction: column;
+    }
+    .modules,
+    .why-list {
+      grid-template-columns: 1fr;
+    }
+    .modules-section,
+    .why-section,
+    .subs-section,
+    .report-section {
+      padding: 20px 18px;
+    }
+    .hero-content,
+    .carousel {
+      padding: 16px 12px;
+    }
+    nav li {
+      margin: 0 14px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="navbar">
+    <div class="navbar-inner">
+      <a href="#hero" class="logo" aria-label="Vocalyst Home">
+        <img src="Localyst-Logo1.jpeg" alt="Vocalyst Logo" />
+        <span class="logo-text">Vocalyst</span>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#modules">Modules</a></li>
+          <li><a href="#why">Why Vocalyst?</a></li>
+          <li><a href="#subscriptions">Subscription</a></li>
+          <li><a href="#sample-reports">Reports</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <header>
+    <section class="hero" id="hero">
+      <div class="hero-content">
+        <div class="hero-title">Vocalyst</div>
+        <div class="hero-desc">
+          Accelerate corporate hiring with world-class AI-powered voice, accent, and communication assessments.<br />
+          Precision, speed, and insight—designed for BPO, healthcare, and customer-centric enterprises.
+        </div>
+        <button class="hero-btn" onclick="window.location='#contact'">Request Demo</button>
+      </div>
+      <div class="carousel">
+        <img
+          src="https://images.unsplash.com/photo-1581091870629-c9a5b7989a2f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHNlYXJjaHwyfHxsYWJvcnxlbnwwfHx8fDE2OTg4NzM5NjB8&ixlib=rb-4.0.3&q=80&w=600"
+          id="carousel-img"
+          alt="Voice assessment banner"
+        />
+        <div class="carousel-controls">
+          <button class="carousel-arrow" onclick="prevSlide()"><i class="fas fa-chevron-left"></i></button>
+          <button class="carousel-arrow" onclick="nextSlide()"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </section>
+  </header>
+  <section class="why-section" id="why">
+    <div class="section-title">Why Choose Vocalyst?</div>
+    <div class="why-list">
+      <div class="why-block">
+        <span class="why-icon"><i class="fas fa-chart-bar"></i></span>
+        <div class="why-content">
+          <span class="why-title">True Predictive Hiring</span>
+          <div class="why-desc">
+            Go beyond resume filters—understand real-time voice quality, communication, and readiness to excel in hectic customer-facing roles.
+          </div>
+        </div>
+      </div>
+      <div class="why-block">
+        <span class="why-icon"><i class="fas fa-shield-alt"></i></span>
+        <div class="why-content">
+          <span class="why-title">Unbiased & Objective</span>
+          <div class="why-desc">
+            Eliminate hiring bias with AI-calibrated scoring. Every candidate is measured equally, making your assessments fair and compliant.
+          </div>
+        </div>
+      </div>
+      <div class="why-block">
+        <span class="why-icon"><i class="fas fa-rocket"></i></span>
+        <div class="why-content">
+          <span class="why-title">Enterprise Speed & Reliability</span>
+          <div class="why-desc">
+            Screen thousands of candidates per day, plug into your existing HR tech, and scale your hiring processes without compromises.
+          </div>
+        </div>
+      </div>
+      <div class="why-block">
+        <span class="why-icon"><i class="fas fa-language"></i></span>
+        <div class="why-content">
+          <span class="why-title">Multi-Accent, Multi-Language Ready</span>
+          <div class="why-desc">
+            Assess English fluency—including accents and Indianisms—and easily switch to regional or multilingual modules for global teams.
+          </div>
+        </div>
+      </div>
+      <div class="why-block">
+        <span class="why-icon"><i class="fas fa-user-check"></i></span>
+        <div class="why-content">
+          <span class="why-title">Real-World Scenarios & Custom Mapping</span>
+          <div class="why-desc">
+            Customize assessment packs by job role—role-play, storytelling, critical thinking, and more, covering every hiring use-case.
+          </div>
+        </div>
+      </div>
+      <div class="why-block">
+        <span class="why-icon"><i class="fas fa-database"></i></span>
+        <div class="why-content">
+          <span class="why-title">Data-Driven, Actionable Insights</span>
+          <div class="why-desc">
+            Get instant reports: identify top talent, spot training needs, and make smarter hiring decisions with analytics at every step.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="modules-section" id="modules">
+    <div class="section-title">Assessment Modules</div>
+    <div class="modules">
+      <div class="module-block" onclick="toggleModule(this)">
+        <div class="module-title"><i class="fas fa-microphone"></i> Speech Assessment</div>
+        <div class="module-desc" style="display: none;">
+          Evaluate spoken fluency, clarity, pronunciation, and accent strength as a candidate responds to real workplace topics.
+        </div>
+        <div class="module-usecase" style="display: none;">
+          <b>Problem:</b> High attrition in call centers due to misfit hires.<br />
+          <b>How Vocalyst helps:</b> Accurately screens for real-world spoken ability, reducing mismatches and training costs.
+        </div>
+      </div>
+      <div class="module-block" onclick="toggleModule(this)">
+        <div class="module-title"><i class="fas fa-repeat"></i> Repeat After Me</div>
+        <div class="module-desc" style="display: none;">
+          Test listening skills and immediate recall by asking candidates to repeat professional phrases and instructions.
+        </div>
+        <div class="module-usecase" style="display: none;">
+          <b>Problem:</b> Employees misunderstand or forget key client instructions.<br />
+          <b>How Vocalyst helps:</b> Ensures new hires have strong active listening and accurate echoing in real-time.
+        </div>
+      </div>
+      <div class="module-block" onclick="toggleModule(this)">
+        <div class="module-title"><i class="fas fa-book-open"></i> Storytelling Assessment</div>
+        <div class="module-desc" style="display: none;">
+          Analyze a candidate’s natural communication, creativity, structure, and engagement by having them narrate stories on-the-spot.
+        </div>
+        <div class="module-usecase" style="display: none;">
+          <b>Problem:</b> Soft skills and creative thinking are hard to measure.<br />
+          <b>How Vocalyst helps:</b> Identifies talent for leadership and customer engagement where canned answers fall short.
+        </div>
+      </div>
+      <div class="module-block" onclick="toggleModule(this)">
+        <div class="module-title"><i class="fas fa-volume-up"></i> Pronunciation Assessment</div>
+        <div class="module-desc" style="display: none;">
+          Pinpoint pronunciation accuracy on industry, brand, or general vocabulary—critical for clear customer communication.
+        </div>
+        <div class="module-usecase" style="display: none;">
+          <b>Problem:</b> Mispronounced brand/product names harm customer trust.<br />
+          <b>How Vocalyst helps:</b> Flags critical words/pronunciations before hiring, avoiding post-hire correction.
+        </div>
+      </div>
+      <div class="module-block" onclick="toggleModule(this)">
+        <div class="module-title"><i class="fas fa-lightbulb"></i> Free Speech</div>
+        <div class="module-desc" style="display: none;">
+          Assess verbal confidence and adaptability by presenting candidates with unexpected topics for an impromptu response.
+        </div>
+        <div class="module-usecase" style="display: none;">
+          <b>Problem:</b> Recruits struggle in unpredictable phone/video interactions.<br />
+          <b>How Vocalyst helps:</b> Validates spontaneous language ability for high-contact or escalation roles.
+        </div>
+      </div>
+      <div class="module-block" onclick="toggleModule(this)">
+        <div class="module-title"><i class="fas fa-comments"></i> Conversation Simulation</div>
+        <div class="module-desc" style="display: none;">
+          Simulate real client or colleague conversations, measuring response accuracy, etiquette, and empathy in high-pressure settings.
+        </div>
+        <div class="module-usecase" style="display: none;">
+          <b>Problem:</b> Candidates score well in written tests but falter in real dialogue.<br />
+          <b>How Vocalyst helps:</b> Measures practical, on-the-fly communication needed for support and sales.
+        </div>
+      </div>
+      <div class="module-block" onclick="toggleModule(this)">
+        <div class="module-title"><i class="fas fa-book"></i> Reading Passage</div>
+        <div class="module-desc" style="display: none;">
+          Measure reading fluency, clarity, and accent in formal/business contexts using predefined technical or business scripts.
+        </div>
+        <div class="module-usecase" style="display: none;">
+          <b>Problem:</b> Fluency with business language is required but tough to judge at scale.<br />
+          <b>How Vocalyst helps:</b> Standardizes reading out loud of critical materials for large teams.
+        </div>
+      </div>
+      <div class="module-block" onclick="toggleModule(this)">
+        <div class="module-title"><i class="fas fa-image"></i> Visual Prompt Speech</div>
+        <div class="module-desc" style="display: none;">
+          Candidates describe or interpret images and visual prompts, demonstrating vocabulary, descriptive detail, and organization.
+        </div>
+        <div class="module-usecase" style="display: none;">
+          <b>Problem:</b> Descriptive abilities are key for training, onboarding, or field roles.<br />
+          <b>How Vocalyst helps:</b> Assesses if a candidate can clearly convey detailed information or observations.
+        </div>
+      </div>
+      <div class="module-block" onclick="toggleModule(this)">
+        <div class="module-title"><i class="fas fa-user-tie"></i> Role Play</div>
+        <div class="module-desc" style="display: none;">
+          Put candidates into simulated workplace scenarios to test their approach to negotiation, persuasion, or problem resolution.
+        </div>
+        <div class="module-usecase" style="display: none;">
+          <b>Problem:</b> Customer or escalation scenarios require quick judgment & empathy.<br />
+          <b>How Vocalyst helps:</b> Simulated exercises highlight best-fit personality and skill mix.
+        </div>
+      </div>
+      <div class="module-block" onclick="toggleModule(this)">
+        <div class="module-title"><i class="fas fa-headphones"></i> Listening Comprehension</div>
+        <div class="module-desc" style="display: none;">
+          Candidate listens to an audio clip and answers questions to test comprehension, retention, and ability to execute verbal instructions.
+        </div>
+        <div class="module-usecase" style="display: none;">
+          <b>Problem:</b> Task errors arise from poor instruction retention.<br />
+          <b>How Vocalyst helps:</b> Directly tests comprehension of both simple and complex spoken material.
+        </div>
+      </div>
+      <div class="module-block" onclick="toggleModule(this)">
+        <div class="module-title"><i class="fas fa-eraser"></i> Error Correction</div>
+        <div class="module-desc" style="display: none;">
+          Present intentionally incorrect text or audio and ask candidates to find and correct mistakes.
+        </div>
+        <div class="module-usecase" style="display: none;">
+          <b>Problem:</b> Quality assurance, auditing, and training require strong correction skills.<br />
+          <b>How Vocalyst helps:</b> Identifies those with precise attention to detail.
+        </div>
+      </div>
+      <div class="module-block" onclick="toggleModule(this)">
+        <div class="module-title"><i class="fas fa-wave-square"></i> Stress/Intonation Analysis</div>
+        <div class="module-desc" style="display: none;">
+          AI analyzes natural use of pitch, stress, and intonation for engaging, fatigue-free voice profiles in customer support.
+        </div>
+        <div class="module-usecase" style="display: none;">
+          <b>Problem:</b> Monotone, flat delivery causes poor customer interaction and faster burnout.<br />
+          <b>How Vocalyst helps:</b> Selects voices that are clear, pleasant, and engaging for any shift.
+        </div>
+      </div>
+      <div class="module-block" onclick="toggleModule(this)">
+        <div class="module-title"><i class="fas fa-language"></i> Multilingual Assessment</div>
+        <div class="module-desc" style="display: none;">
+          Test a candidate’s ability to use multiple languages or accents within the same assessment, for versatile and global teams.
+        </div>
+        <div class="module-usecase" style="display: none;">
+          <b>Problem:</b> Multinational or multilingual BPOs need nimble communicators.<br />
+          <b>How Vocalyst helps:</b> Validates code-switching and language accuracy before hiring.
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="subs-section" id="subscriptions">
+    <div class="subs-title">Subscription & Job Profile Mapping</div>
+    <ul class="subs-list">
+      <li>Subscribe individually or bundle modules. Flexible pay-per-use or monthly pricing models let you pay by candidate or volume.</li>
+      <li>Map one or multiple modules to any job profile for automated candidate routing and role-specific assessments.</li>
+      <li>Use the admin dashboard to create & manage assessment packs, view analytics, and generate compliance-ready reports.</li>
+      <li>Automate the assignment of modules on hiring portals or internal ATS platforms to streamline evaluation workflows.</li>
+      <li>Granular usage reporting and ROI insights help optimize spending and improve hiring quality continuously.</li>
+    </ul>
+    <div style="margin-top: 22px;">
+      <div style="font-weight:700; color:#23408f; margin-bottom:10px;">Expanded Job Profile Mapping Examples:</div>
+      <ul class="job-list">
+        <li><b>Call Center Agent:</b> Speech Assessment, Repeat After Me, Pronunciation Assessment, Stress/Intonation</li>
+        <li><b>Content Reviewer:</b> Free Speech, Error Correction, Listening Comprehension</li>
+        <li><b>Customer Service Executive:</b> Role Play, Listening Comprehension, Conversation Simulation</li>
+        <li><b>Sales Representative:</b> Storytelling Assessment, Role Play, Free Speech</li>
+        <li><b>Healthcare Support Staff:</b> Reading Passage, Pronunciation Assessment, Multilingual Assessment</li>
+        <li><b>Technical Trainer:</b> Reading Passage, Visual Prompt Speech, Speech Assessment</li>
+        <li><b>Quality Assurance Specialist:</b> Error Correction, Listening Comprehension, Speech Assessment</li>
+        <li><b>Multilingual Support:</b> Multilingual Assessment, Repeat After Me, Conversation Simulation</li>
+        <li><b>Escalation Manager:</b> Role Play, Storytelling Assessment, Stress/Intonation Analysis</li>
+        <li><b>Customer Success Manager:</b> Storytelling, Conversation Simulation, Free Speech</li>
+        <li><b>Training Coordinator:</b> Reading Passage, Pronunciation, Visual Prompt Speech</li>
+        <li><b>Language Coach:</b> Pronunciation, Repeat After Me, Error Correction</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="report-section" id="sample-reports">
+    <div class="section-title">Sample Assessment Reports</div>
+    <p>Below are example reports for two Indian candidates assessed by Vocalyst across core modules, demonstrating pass and fail scenarios.</p>
+    <table aria-label="Candidate assessment reports">
+      <thead>
+        <tr>
+          <th>Candidate Name</th>
+          <th>Speech Assessment</th>
+          <th>Repeat After Me</th>
+          <th>Storytelling Assessment</th>
+          <th>Pronunciation Assessment</th>
+          <th>Free Speech</th>
+          <th>Conversation Simulation</th>
+          <th>Overall Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="pass" tabindex="0">
+          <td class="candidate-name">Amit Verma</td>
+          <td>88%</td>
+          <td>92%</td>
+          <td>85%</td>
+          <td>90%</td>
+          <td>87%</td>
+          <td>91%</td>
+          <td class="status-pass" aria-label="Pass">Pass</td>
+        </tr>
+        <tr class="fail" tabindex="0">
+          <td class="candidate-name">Sneha Patil</td>
+          <td>65%</td>
+          <td>68%</td>
+          <td>70%</td>
+          <td>60%</td>
+          <td>63%</td>
+          <td>57%</td>
+          <td class="status-fail" aria-label="Fail">Fail</td>
+        </tr>
+      </tbody>
+    </table>
+    <p><b>Notes:</b> Amit demonstrated clear, fluent, and confident communication with minimal pronunciation errors. Sneha requires additional language coaching due to clarity and fluency issues affecting her overall score.</p>
+  </section>
+
+  <section class="why-section" id="contact">
+    <div class="section-title">Contact & Demo</div>
+    <p style="font-size: 18px; margin-bottom: 14px;">Schedule a personalized demo or discuss enterprise pricing.</p>
+    <p style="font-size: 16px;"><i class="fas fa-envelope"></i> Email: <b>info@vocalyst.com</b></p>
+    <p style="font-size: 16px;"><i class="fas fa-phone"></i> Phone: <b>+91-XXXXXXXXXX</b></p>
+    <div style="margin-top: 18px;">
+      <button class="hero-btn" onclick="window.location='mailto:info@vocalyst.com'">Request Demo</button>
+    </div>
+  </section>
+
+  <div class="footer">
+    &copy; 2025 Vocalyst | All rights reserved.
+  </div>
+
+<script>
+  // Carousel
+  var images = [
+    "https://images.unsplash.com/photo-1581091870629-c9a5b7989a2f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHNlYXJjaHwyfHxsYWJvcnxlbnwwfHx8fDE2OTg4NzM5NjB8&ixlib=rb-4.0.3&q=80&w=600",
+    "https://images.unsplash.com/photo-1542744094-24638eff58bb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHNlYXJjaHwxfHxjb2xsYWJvcmF0aXZlfGVufDB8fHx8MTY5ODg3Mzk5Ng&ixlib=rb-4.0.3&q=80&w=600",
+    "https://images.unsplash.com/photo-1596495577886-d920f1b0aa44?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHNlYXJjaHwyfHxjb25maGVyZW5jZXxlbnwwfHx8fDE2OTg4NzM5OTg&ixlib=rb-4.0.3&q=80&w=600"
+  ];
+  var i = 0;
+  function showSlide(idx) {
+    var img = document.getElementById("carousel-img");
+    if (idx < 0) idx = images.length - 1;
+    if (idx >= images.length) idx = 0;
+    img.src = images[idx];
+    i = idx;
+  }
+  function prevSlide() {
+    showSlide(i - 1);
+  }
+  function nextSlide() {
+    showSlide(i + 1);
+  }
+  document.addEventListener("DOMContentLoaded", function () {
+    showSlide(0);
+  });
+
+  // Module expand/collapse function
+  function toggleModule(el) {
+    const desc = el.querySelector(".module-desc");
+    const usecase = el.querySelector(".module-usecase");
+    if (desc.style.display === "block") {
+      desc.style.display = "none";
+      usecase.style.display = "none";
+      el.style.boxShadow = "0 2px 16px rgba(72, 73, 138, 0.035)";
+    } else {
+      // Close others
+      document.querySelectorAll(".module-desc").forEach((d) => (d.style.display = "none"));
+      document.querySelectorAll(".module-usecase").forEach((u) => (u.style.display = "none"));
+      document.querySelectorAll(".module-block").forEach(
+        (m) => (m.style.boxShadow = "0 2px 16px rgba(72, 73, 138, 0.035)")
+      );
+      desc.style.display = "block";
+      usecase.style.display = "block";
+      el.style.boxShadow = "0 8px 36px rgba(72, 73, 138, 0.16)";
+      desc.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
+</script>
+</body>
+</html>
